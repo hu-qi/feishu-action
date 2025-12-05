@@ -104,7 +104,6 @@ const eventHandlers: Record<string, EventHandler> = {
     actor,
   }) => {
     const commitUrl = head_commit?.url || `${server_url}/${repository}/tree/${ref_name}`;
-    const commitId = head_commit?.id?.slice(0, 7) || 'n/a';
     const commitMessage = head_commit?.message || 'Create/Delete/Update Branch (No head commit)';
 
     return {
@@ -113,7 +112,7 @@ const eventHandlers: Record<string, EventHandler> = {
         {
           tag: 'markdown',
           content: [
-            createContentItem('提交链接：', createLink(commitUrl, commitId)),
+            createContentItem('提交链接：', createLink(commitUrl)),
             createContentItem('代码分支：', createLink(`${server_url}/${repository}/tree/${ref_name}`, ref_name)),
             createContentItem('提交作者：', createLink(`${server_url}/${actor}`, actor)),
             createContentItem('提交信息：', commitMessage),
