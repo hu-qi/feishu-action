@@ -35,7 +35,7 @@ jobs:
 
       - name: Send message to Lark
         if: ${{ contains(steps.message.outputs.content, ':') }}
-        uses: Open-Source-Bazaar/feishu-action@a2f4d3863274522f9e200c920be5ecec73d947e9
+        uses: ./
         with:
           url: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
           msg_type: interactive
