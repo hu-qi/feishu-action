@@ -29,9 +29,14 @@ jobs:
         # env:
         #   FEISHU_BOT_WEBHOOK_URL: ${{ secrets.FEISHU_BOT_WEBHOOK_URL }}
         run: |
+          echo "Checking FEISHU_BOT_WEBHOOK_URL..."
+          echo "FEISHU_BOT_WEBHOOK_URL: ${{secrets.FEISHU_BOT_WEBHOOK_URL}}"
+          echo "FEISHU_BOT_WEBHOOK_URL: ${{env.FEISHU_BOT_WEBHOOK_URL}}"
+          echo "FEISHU_BOT_WEBHOOK_URL: $FEISHU_BOT_WEBHOOK_URL"
           if [ -z "$FEISHU_BOT_WEBHOOK_URL" ]; then
             echo "Error: FEISHU_BOT_WEBHOOK_URL secret is not set."
-            exit 1
+          else
+            echo "FEISHU_BOT_WEBHOOK_URL secret is set."
           fi
 
       - name: Event Message serialization
