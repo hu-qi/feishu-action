@@ -34,15 +34,17 @@ jobs:
 
       - name: Event Message serialization
         id: message
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: |
-          YAML=$(echo "$GITHUB_CONTEXT" | deno --allow-all .github/scripts/transform-message-for-card.ts)
+          YAML=$(
+            cat <<'JSON' | deno run --allow-all .github/scripts/transform-message-for-card.ts
+          ${{ toJSON(github) }}
+          JSON
+          )
           {
             echo 'content<<EOF'
-            echo $YAML
+            echo "$YAML"
             echo 'EOF'
-          } >> $GITHUB_OUTPUT
+          } >> "$GITHUB_OUTPUT"
 
       - name: Send message to Lark
         if: ${{ contains(steps.message.outputs.content, ':') }}
