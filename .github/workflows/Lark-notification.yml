@@ -29,7 +29,7 @@ jobs:
           YAML=$(
             cat <<'JSON' | deno run --allow-all .github/scripts/transform-message.ts
             ${{ toJSON(github) }}
-            JSON
+          JSON
           )
           {
             echo 'content<<EOF'
